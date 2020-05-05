@@ -1,14 +1,20 @@
 <template>
   <div class="base-layout">
-    <nav>
-      <router-link to='/'>Home</router-link>
-      <router-link to='/about'>About</router-link>
-    </nav>
+    <b-navbar toggleable="md" type="dark" variant="dark" :sticky="true">
+      <b-navbar-brand to="/">To-Do</b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/">Home</b-nav-item>
+          <b-nav-item to="/about">About</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <main>
       <slot/>
     </main>
     <footer>
-      &copy; 2020 MagicaQuartet &lt;dev.dskim@gmail.com>&gt;
+      &copy; 2020 MagicaQuartet &lt;dev.dskim@gmail.com&gt;
     </footer>
   </div>
 </template>
