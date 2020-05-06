@@ -3,15 +3,15 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-const Home = () => import('./views/Home.vue');
+const Todo = () => import('./views/Todo.vue');
 const About = () => import('./views/About.vue');
 
 export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Todo',
+      component: Todo
     },
     {
       path: '/about',
