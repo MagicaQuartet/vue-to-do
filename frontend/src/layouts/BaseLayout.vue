@@ -24,5 +24,11 @@
 </script>
 
 <style scoped>
-
+  main {
+    padding: 30px;
+  }
+  
+  footer {
+    text-align: center;
+  }
 </style>
