@@ -2,10 +2,10 @@
   <div class="todo-item" :class="{ completed: completed }">
     <label class="item-checkbox">
       <input type="checkbox" v-model="completed">
-      <component :is="checkboxIcon" font-scale="2"></component>
+      <component :is="checkboxIcon" font-scale="2" class="fake-checkbox"></component>
+      <span class="item-content">{{ content }}</span>
+      <span class="item-datetime">{{ datetimeString }}</span>
     </label>
-    <span class="item-content">{{ content }}</span>
-    <span class="item-datetime">{{ datetimeString }}</span>
   </div>
 </template>
 
@@ -43,20 +43,28 @@
 
 <style>
   .todo-item {
-    display: flex;
-    align-items: center;
     padding: 0.8rem;
     margin: 10px 0;
-    height: 3.6rem;
     border-radius: 10px;
     background-color: #eeeeee;
+    box-shadow: 3px 3px 3px gray;
   }
   
-  .todo-item > * {
-    padding: 0 0.25rem;
+  .todo-item.completed {
+    background-color: #c7c7c7;
   }
   
-  .todo-item.completed .item-content {
+  .todo-item label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .todo-item label > span {
+    padding: 0 0.5rem;
+  }
+  
+  .completed .item-content {
     text-decoration: line-through;
   }
   
@@ -71,12 +79,16 @@
     opacity: 0;
   }
   
+  .fake-checkbox:hover {
+    transform: scale(1.1);
+  }
+  
   .item-content {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
   
   .item-datetime {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-style: italic;
   }
 </style>
