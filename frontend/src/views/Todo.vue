@@ -24,11 +24,17 @@
     },
     methods: {
       receiveItem: function(value) {
-        this.todos.push(value);
+        this.todos.push({
+          id: this.counter,
+          content: value,
+          datetime: new Date(),
+        });
+        this.counter++;
       }
     },
     data: function() {
       return {
+        counter: 0,
         newItem: "",
         todos: []
       }
@@ -43,7 +49,7 @@
   }
   
   .todo > * {
-    margin: 15px 0;
+    margin: 30px 0;
   }
   
   h1 {

@@ -49,7 +49,7 @@
   
   .add-button {
     border-radius: 50%;
-    margin: 0 20px;
+    margin-left: 20px;
     background-color: #b7b7b7;
   }
 </style>
