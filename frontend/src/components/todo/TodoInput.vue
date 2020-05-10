@@ -24,8 +24,9 @@
     },
     methods: {
       submitItem: function() {
-        if (this.$refs.input.value) {
+        if (this.$refs.input.value.length > 0) {
           this.$emit('input', this.$refs.input.value);
+          this.$refs.input.value = "";
         }
       }
     }
