@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 const Todo = () => import('./views/Todo.vue');
 const About = () => import('./views/About.vue');
 const Login = () => import('./views/Login.vue');
+const Register = () => import('./views/Register.vue');
 
 export default new VueRouter({
   routes: [
@@ -29,6 +30,11 @@ export default new VueRouter({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ],
   mode: 'history'

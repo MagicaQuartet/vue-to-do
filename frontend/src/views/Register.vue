@@ -1,7 +1,7 @@
 <template>
   <auth-layout>
     <auth-form
-      title="Sign in"></auth-form>
+      title="Sign up"></auth-form>
   </auth-layout>
 </template>
 
@@ -10,7 +10,7 @@ import AuthLayout from '../layouts/AuthLayout'
 import AuthForm from '../components/auth/AuthForm'
   
 export default {
-  name: "Login",
+  name: "Register",
   components: {
     AuthLayout,
     AuthForm
