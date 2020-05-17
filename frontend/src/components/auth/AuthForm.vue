@@ -19,7 +19,7 @@
 <script>
 export default {
   name: "AuthForm",
-  props: ['title'],
+  props: ['for'],
   data: function() {
     return {
       username: "",
@@ -28,20 +28,23 @@ export default {
   },
   computed: {
     isRegister: function() {
-      return this.title === "Register"
+      return this.for === "register";
+    },
+    title: function() {
+      return this.isRegister ? "Sign up" : "Sign in";
+    },
+    requestUri: function() {
+      return '/api/auth/' + this.for;
     }
   },
   methods: {
     onSubmit: function() {
-      const component = this;
-      console.log(this.$data);
-      
-      this.$http.post('/api/auth/login', this.$data)
-        .then(function(response) {
-          component.message = response.data;
-        }).catch(function(err) {
-          console.log(err);
-        });
+      this.$http.post(this.requestUri, this.$data)
+      .then(function(response) {
+        console.log(response.data);
+      }).catch(function(err) {
+        console.log(err);
+      });
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <auth-layout>
     <auth-form
-      title="Sign up"></auth-form>
+      for="register"></auth-form>
   </auth-layout>
 </template>
 
