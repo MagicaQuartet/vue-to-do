@@ -4,11 +4,12 @@
     <div class="login-form">
       <div class="form-input">
         <label for="username">Username</label>
-        <input v-model="username" type="text" name="username" id="username">
+        <input v-model="params.username" type="text" name="username" id="username">
+        <p class="warning" v-if="isRegister">{{ warning.username }}</p>
       </div>
       <div class="form-input">
         <label for="password">Password</label>
-        <input v-model="password" type="password" name="password" id="password">
+        <input v-model="params.password" type="password" name="password" id="password">
       </div>
       <input type="submit" :value="title">
       <router-link v-if="!isRegister" to="/register" id="register-link">Sign up</router-link>
@@ -22,8 +23,13 @@ export default {
   props: ['for'],
   data: function() {
     return {
-      username: "",
-      password: ""
+      params: {
+        username: "",
+        password: "",
+      },
+      warning: {
+        username: ""
+      }
     }
   },
   computed: {
@@ -35,13 +41,25 @@ export default {
     },
     requestUri: function() {
       return '/api/auth/' + this.for;
+    },
+    redirectUri: function() {
+      return this.isRegister ? '/login' : '/';
     }
   },
   methods: {
     onSubmit: function() {
-      this.$http.post(this.requestUri, this.$data)
+      const component = this;
+      
+      this.$http.post(this.requestUri, this.$data.params)
       .then(function(response) {
-        console.log(response.data);
+        const success = response.data.success;
+        
+        if (success) {
+          component.warning.username = "";
+          component.$router.push(component.redirectUri)
+        } else {
+          component.warning.username = "이미 존재하는 username입니다.";
+        }
       }).catch(function(err) {
         console.log(err);
       });
@@ -74,6 +92,13 @@ export default {
   input {
     width: 100%;
     outline: none;
+  }
+  
+  .warning {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--danger);
   }
   
   #register-link {
