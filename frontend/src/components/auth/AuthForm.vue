@@ -49,14 +49,22 @@ export default {
   methods: {
     onSubmit: function() {
       const component = this;
+      const username = this.params.username;
       
-      this.$http.post(this.requestUri, this.$data.params)
+      this.$http.post(this.requestUri, this.params)
       .then(function(response) {
         const success = response.data.success;
         
         if (success) {
           component.warning.username = "";
-          component.$router.push(component.redirectUri)
+          
+          if (!component.isRegister) {
+            component.$store.commit('auth/login', {
+              username
+            });
+          }
+          
+          component.$router.push(component.redirectUri);
         } else {
           component.warning.username = "이미 존재하는 username입니다.";
         }

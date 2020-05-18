@@ -20,7 +20,13 @@
 </template>
 
 <script>
-
+export default {
+  mounted: function() {
+    if (this.$store.getters['auth/getUsername'] === null) {
+      this.$router.push('/login');
+    }
+  }
+}
 </script>
 
 <style scoped>
