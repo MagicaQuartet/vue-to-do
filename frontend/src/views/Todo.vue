@@ -22,14 +22,21 @@
       TodoInput,
       TodoList
     },
-    methods: {
-      receiveItem: function(value) {
-        this.todos.push({
-          id: this.counter,
-          content: value,
-          datetime: new Date(),
+    beforeCreate: function() {
+      const username = this.$store.getters['auth/getUsername'];
+      const component = this;
+      
+      if (username !== null) {
+        this.$http.get(`/api/todos/${username}`)
+        .then(function(response) {
+          const loadedTodos = response.data;
+          loadedTodos.forEach(function(todo) {
+            todo.datetime = new Date(todo.datetime);
+          });
+
+          component.counter = loadedTodos.length;
+          component.todos = loadedTodos;
         });
-        this.counter++;
       }
     },
     data: function() {
@@ -38,7 +45,24 @@
         newItem: "",
         todos: []
       }
-    }
+    },
+    methods: {
+      receiveItem: function(value) {
+        const username = this.$store.getters['auth/getUsername'];
+        const params = {
+          id: this.counter,
+          content: value,
+          datetime: new Date(),
+        };
+        //const component = this;
+        
+        this.todos.push(params);
+        this.$http.post(`/api/todos/${username}`, params)
+        .then();
+        
+        this.counter++;
+      }
+    },
   };
 </script>
 

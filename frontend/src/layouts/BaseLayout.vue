@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  mounted: function() {
+  beforeCreate: function() {
     if (this.$store.getters['auth/getUsername'] === null) {
       this.$router.push('/login');
     }
