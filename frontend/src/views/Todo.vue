@@ -57,8 +57,8 @@
         };
         //const component = this;
         
-        this.todos.push(params);
-        this.$http.post(`/api/todos/${username}`, params);
+        this.$http.post(`/api/todos/${username}`, params)
+        .then(() => this.todos.push(params));
         
         this.counter++;
       }
