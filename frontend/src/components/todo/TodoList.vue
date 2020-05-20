@@ -3,8 +3,9 @@
     <todo-item
       v-for="item in list"
       :key="item.id"
+      :completed="item.completed"
       :content="item.content"
-      :datetime="item.datetime"></todo-item>
+      :datetime="item.modifiedDatetime"></todo-item>
   </div>
 </template>
 

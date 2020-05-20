@@ -18,12 +18,7 @@
       BIconCircle,
       BIconCheckCircle
     },
-    props: ['content', 'datetime'],
-    data: function() {
-      return {
-        completed: false
-      } 
-    },
+    props: ['content', 'completed', 'datetime'],
     computed: {
       datetimeString: function() {
         return `

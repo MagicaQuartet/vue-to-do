@@ -31,7 +31,7 @@
         .then(function(response) {
           const loadedTodos = response.data;
           loadedTodos.forEach(function(todo) {
-            todo.datetime = new Date(todo.datetime);
+            todo.modifiedDatetime = new Date(todo.modifiedDatetime);
           });
 
           component.counter = loadedTodos.length;
@@ -52,13 +52,13 @@
         const params = {
           id: this.counter,
           content: value,
-          datetime: new Date(),
+          completed: false,
+          modifiedDatetime: new Date(),
         };
         //const component = this;
         
         this.todos.push(params);
-        this.$http.post(`/api/todos/${username}`, params)
-        .then();
+        this.$http.post(`/api/todos/${username}`, params);
         
         this.counter++;
       }
