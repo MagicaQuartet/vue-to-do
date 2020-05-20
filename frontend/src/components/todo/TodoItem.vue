@@ -1,7 +1,7 @@
 <template>
-  <div class="todo-item" :class="{ completed: completed }">
+  <div class="todo-item" :class="{ completed: itemCompleted }">
     <label class="item-checkbox">
-      <input type="checkbox" v-model="completed">
+      <input type="checkbox" v-model="itemCompleted" @change="updateCompleted()">
       <component :is="checkboxIcon" font-scale="2" class="fake-checkbox"></component>
       <span class="item-content">{{ content }}</span>
       <span class="item-datetime">{{ datetimeString }}</span>
@@ -18,7 +18,12 @@
       BIconCircle,
       BIconCheckCircle
     },
-    props: ['content', 'completed', 'datetime'],
+    props: ['todoId', 'content', 'completed', 'datetime'],
+    data: function() {
+      return {
+        itemCompleted: this.completed,
+      }
+    },
     computed: {
       datetimeString: function() {
         return `
@@ -30,7 +35,18 @@
         `;
       },
       checkboxIcon: function() {
-        return this.completed ? 'b-icon-check-circle' : 'b-icon-circle';
+        return this.itemCompleted ? 'b-icon-check-circle' : 'b-icon-circle';
+      }
+    },
+    methods: {
+      updateCompleted: function() {
+        const username = this.$store.getters['auth/getUsername'];
+        
+        const params = {
+          completed: this.itemCompleted,
+        };
+        
+        this.$http.post(`/api/todos/${username}/${this.todoId}`, params);
       }
     }
   }

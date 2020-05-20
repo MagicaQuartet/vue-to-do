@@ -3,6 +3,7 @@
     <todo-item
       v-for="item in list"
       :key="item.id"
+      :todo-id="item.id"
       :completed="item.completed"
       :content="item.content"
       :datetime="item.modifiedDatetime"></todo-item>

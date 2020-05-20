@@ -19,4 +19,22 @@ router.post('/:username', function(req, res) {
   .then(() => res.sendStatus(200));
 });
 
+router.post('/:username/:todoid', function(req, res) {
+  const username = req.params.username;
+  const todoId = req.params.todoid;
+  
+  const completed = req.body.completed;
+  
+  User.updateOne(
+    {
+      username,
+      "todos.id": todoId,
+    },
+    {
+      $set: { "todos.$.completed": completed }
+    }
+  )
+  .then(() => res.sendStatus(200));
+});
+
 module.exports = router;
