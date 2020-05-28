@@ -5,7 +5,7 @@
       <todo-input
         :value="newItem"
         @input="receiveItem"></todo-input>
-      <todo-list :list="todos"></todo-list>
+      <todo-list></todo-list>
     </div>
   </base-layout>
 </template>
@@ -22,45 +22,24 @@
       TodoInput,
       TodoList
     },
-    beforeCreate: function() {
-      const username = this.$store.getters['auth/getUsername'];
-      const component = this;
-      
-      if (username !== null) {
-        this.$http.get(`/api/todos/${username}`)
-        .then(function(response) {
-          const loadedTodos = response.data;
-          loadedTodos.forEach(function(todo) {
-            todo.modifiedDatetime = new Date(todo.modifiedDatetime);
-          });
-
-          component.counter = loadedTodos.length;
-          component.todos = loadedTodos;
-        });
-      }
-    },
     data: function() {
       return {
-        counter: 0,
         newItem: "",
-        todos: []
+      }
+    },
+    computed: {
+      counter: function() {
+        return this.$store.getters['user/getCounter'];
       }
     },
     methods: {
       receiveItem: function(value) {
-        const username = this.$store.getters['auth/getUsername'];
-        const params = {
+        this.$store.dispatch('user/addTodo', {
           id: this.counter,
           content: value,
           completed: false,
           modifiedDatetime: new Date(),
-        };
-        //const component = this;
-        
-        this.$http.post(`/api/todos/${username}`, params)
-        .then(() => this.todos.push(params));
-        
-        this.counter++;
+        });        
       }
     },
   };

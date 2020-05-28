@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item" :class="{ completed: itemCompleted }">
     <label class="item-checkbox">
-      <input type="checkbox" v-model="itemCompleted" @change="updateCompleted()">
+      <input type="checkbox" v-model="itemCompleted" @change="updateCompleted">
       <component :is="checkboxIcon" font-scale="2" class="fake-checkbox"></component>
       <span class="item-content">{{ content }}</span>
       <span class="item-datetime">{{ datetimeString }}</span>
@@ -40,13 +40,10 @@
     },
     methods: {
       updateCompleted: function() {
-        const username = this.$store.getters['auth/getUsername'];
-        
-        const params = {
+        this.$store.dispatch('user/updateTodo', {
+          id: this.todoId,
           completed: this.itemCompleted,
-        };
-        
-        this.$http.post(`/api/todos/${username}/${this.todoId}`, params);
+        });
       }
     }
   }

@@ -22,7 +22,7 @@
 <script>
 export default {
   beforeCreate: function() {
-    if (this.$store.getters['auth/getUsername'] === null) {
+    if (this.$store.getters['user/getUsername'] === null) {
       this.$router.push('/login');
     }
   }

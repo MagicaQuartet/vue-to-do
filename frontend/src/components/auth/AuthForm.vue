@@ -59,9 +59,11 @@ export default {
           component.warning.username = "";
           
           if (!component.isRegister) {
-            component.$store.commit('auth/login', {
+            component.$store.commit('user/login', {
               username
             });
+            
+            component.$store.dispatch('user/loadTodos');
           }
           
           component.$router.push(component.redirectUri);

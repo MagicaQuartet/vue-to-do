@@ -1,12 +1,19 @@
 <template>
   <div class="todo-list">
     <todo-item
-      v-for="item in list"
+      v-for="item in notCompletedTodos"
       :key="item.id"
       :todo-id="item.id"
       :completed="item.completed"
       :content="item.content"
-      :datetime="item.modifiedDatetime"></todo-item>
+      :datetime="new Date(item.modifiedDatetime)"></todo-item>
+    <todo-item
+      v-for="item in completedTodos"
+      :key="item.id"
+      :todo-id="item.id"
+      :completed="item.completed"
+      :content="item.content"
+      :datetime="new Date(item.modifiedDatetime)"></todo-item>
   </div>
 </template>
 
@@ -18,7 +25,14 @@
     components: {
       TodoItem
     },
-    props: ['list']
+    computed: {
+      completedTodos: function() {
+        return this.$store.getters['user/getCompletedTodos'];
+      },
+      notCompletedTodos: function() {
+        return this.$store.getters['user/getNotCompletedTodos'];
+      }
+    }
   }
 </script>
 
