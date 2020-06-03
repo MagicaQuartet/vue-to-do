@@ -11,7 +11,7 @@
       </b-collapse>
     </b-navbar>
     <main>
-      <slot/>
+      <slot />
     </main>
     <footer>
       &copy; 2020 MagicaQuartet &lt;dev.dskim@gmail.com&gt;
@@ -19,22 +19,14 @@
   </div>
 </template>
 
-<script>
-export default {
-  beforeCreate: function() {
-    if (this.$store.getters['user/getUsername'] === null) {
-      this.$router.push('/login');
-    }
-  }
-}
-</script>
+<script></script>
 
 <style scoped>
-  main {
-    padding: 30px;
-  }
-  
-  footer {
-    text-align: center;
-  }
+main {
+  padding: 30px;
+}
+
+footer {
+  text-align: center;
+}
 </style>
