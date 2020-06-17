@@ -38,7 +38,6 @@
 
 <style scoped>
   .todo-list {
-    max-height: 480px;
     padding: 0.8rem 1.2rem 0 0;
     overflow: auto;
   }

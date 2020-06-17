@@ -78,6 +78,8 @@
   
   .item-checkbox {
     margin: 0;
+    position: relative;
+    padding-left: 32px;
   }
   
   .item-checkbox input {
@@ -85,6 +87,12 @@
     top: 0;
     left: 0;
     opacity: 0;
+  }
+  
+  .fake-checkbox {
+    position: absolute;
+    top: 0.15rem;
+    left: 0;
   }
   
   .fake-checkbox:hover {
