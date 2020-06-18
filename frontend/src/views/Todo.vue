@@ -27,15 +27,9 @@
         newItem: "",
       }
     },
-    computed: {
-      counter: function() {
-        return this.$store.getters['user/getCounter'];
-      }
-    },
     methods: {
       receiveItem: function(value) {
         this.$store.dispatch('user/addTodo', {
-          id: this.counter,
           content: value,
           completed: false,
           modifiedDatetime: new Date(),

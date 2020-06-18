@@ -2,15 +2,15 @@
   <div class="todo-list">
     <todo-item
       v-for="item in notCompletedTodos"
-      :key="item.id"
-      :todo-id="item.id"
+      :key="item._id"
+      :todo-id="item._id"
       :completed="item.completed"
       :content="item.content"
       :datetime="new Date(item.modifiedDatetime)"></todo-item>
     <todo-item
       v-for="item in completedTodos"
-      :key="item.id"
-      :todo-id="item.id"
+      :key="item._id"
+      :todo-id="item._id"
       :completed="item.completed"
       :content="item.content"
       :datetime="new Date(item.modifiedDatetime)"></todo-item>

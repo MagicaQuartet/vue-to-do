@@ -12,9 +12,6 @@ const getters = {
   getTodos: function(state) {
     return state.todos;
   },
-  getCounter: function(state) {
-    return state.todos.length;
-  },
   getCompletedTodos: function(state) {
     return state.todos.filter((item) => item.completed);
   },
@@ -34,7 +31,8 @@ const mutations = {
     state.todos.push(payload);
   },
   updateTodo: function(state, payload) {
-    const index = state.todos.findIndex((item) => item.id === payload.id);
+    console.log(payload);
+    const index = state.todos.findIndex((item) => item._id === payload._id);
     const item = state.todos[index];
     
     Object.keys(payload).forEach(function(key) {
@@ -62,8 +60,8 @@ const actions = {
   },
   updateTodo: function({ commit, state }, todo) {
     const username = state.username;
-    
-    axios.post(`/api/todos/${username}/${todo.id}`, todo)
+
+    axios.post(`/api/todos/${username}/${todo._id}`, todo)
     .then(() => commit('updateTodo', todo));
   }
 };

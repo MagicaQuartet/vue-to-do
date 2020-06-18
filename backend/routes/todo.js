@@ -28,7 +28,7 @@ router.post('/:username/:todoid', function(req, res) {
   User.updateOne(
     {
       username,
-      "todos.id": todoId,
+      "todos._id": todoId,
     },
     {
       $set: { "todos.$.completed": completed }

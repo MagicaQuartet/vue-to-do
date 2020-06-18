@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
           modifiedDatetime: { type: Date, required: true }
         }
       ],
-      _id: false,
       default: []
     },
     registerDatetime: { type: Date, default: Date.now },

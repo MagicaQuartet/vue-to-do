@@ -41,7 +41,7 @@
     methods: {
       updateCompleted: function() {
         this.$store.dispatch('user/updateTodo', {
-          id: this.todoId,
+          _id: this.todoId,
           completed: this.itemCompleted,
         });
       }
